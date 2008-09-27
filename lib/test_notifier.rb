@@ -16,7 +16,7 @@ module TestNotifier
   def self.notify(image, title, message)
     image ||= "none.png"
     
-    custom_image = File.join(File.expand_path("~/.test_notifier"), "image", image)
+    custom_image = File.join(File.expand_path("~/.test_notifier"), image)
     image = File.exists?(custom_image) ? custom_image : File.join(File.dirname(__FILE__), "test_notifier", "icons", image)
 
     if RUBY_PLATFORM =~ /darwin/

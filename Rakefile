@@ -5,7 +5,7 @@ PKG_FILES = %w(Rakefile test_notifier.gemspec History.txt License.txt README.mar
 
 spec = Gem::Specification.new do |s|
   s.name = "test_notifier"
-  s.version = "0.0.9"
+  s.version = "0.0.10"
   s.summary = "Display system notifications (dbus, growl and snarl) after running tests."
   s.authors = ["Nando Vieira"]
   s.email = ["fnando.vieira@gmail.com"]

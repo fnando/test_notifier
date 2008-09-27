@@ -34,3 +34,7 @@
 == 0.0.9
 
 * minor fix: added freebsd pattern
+
+== 0.0.10
+
+* minor fix: fixed path for custom images
