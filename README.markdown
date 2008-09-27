@@ -59,7 +59,11 @@ USAGE:
 
 If you're using Test::Unit you should add `require "test_notifier/test_unit"`
 If you're using RSpec you should add `require "test_notifier/rspec"`
-If you're using Autotest you should add `require "test_notifier/autotest"` to the file `~/.autotest`
+If you're using Autotest you should add `require "test_notifier/autotest"` to
+the file `~/.autotest`
+
+If you want to customize the images, create a directory at `~/.test_notifier`
+and save the images `none.png`, `passed.png`, `failure.png` and `error.png`.
 
 MAINTAINER
 ----------
