@@ -21,7 +21,7 @@ file anyway in order to clean up the failures/errors).
 INSTALLATION:
 -------------
 
-=== Mac OS X
+###Mac OS X
 
 1) Install Growl (http://growl.info/)
 2) Install the growlnotify script located on the "Extras" directory
@@ -29,20 +29,20 @@ INSTALLATION:
 options "Listen for incoming notifications" and "Allow remote 
 application registration" on the Network tab.
 
-=== Linux
+###Linux
 
 1) Install libnotify-bin ant its dependencies:
 	
 	aptitude install libnotify-bin
 
-=== Windows
+###Windows
 
 1) Install Snarl: download from http://www.fullphat.net/
 2) Install ruby-snarl:
 
 	gem install ruby-snarl
 
-=== All
+###All
 
 Then, install the gem:
 
