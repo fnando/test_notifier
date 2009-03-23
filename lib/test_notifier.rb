@@ -47,6 +47,9 @@ module TestNotifier
       # if notify-send is avaible
       elsif `which notify-send` && $? == 0
         system("notify-send -i #{image} #{title} \"#{message}\"")
+      else
+        puts "No popup notification software installed."
+        puts "Try installing one of this:\n * osd_cat (apt-get install xosd-bin),\n * knotify (use KDE),\n * notify-send (apt-get install libnotify-bin)"
       end
     end
   end
