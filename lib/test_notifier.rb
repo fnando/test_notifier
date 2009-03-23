@@ -1,5 +1,3 @@
-require 'snarl' if RUBY_PLATFORM =~ /mswin/
-
 module TestNotifier
   # create a .test_notifier at your home
   # directory and save the images as passed.png,
@@ -20,9 +18,20 @@ module TestNotifier
     image = File.exists?(custom_image) ? custom_image : File.join(File.dirname(__FILE__), "test_notifier", "icons", image)
 
     if RUBY_PLATFORM =~ /darwin/
-      system("growlnotify -n test_notifier --image #{image} -p 2 -m \"#{message}\" -t \"#{title}\"")
+      if `ps -Al | grep GrowlHelper` && `which growlnotify` && $? == 0
+        system("growlnotify -n test_notifier --image #{image} -p 2 -m \"#{message}\" -t \"#{title}\"")
+      else
+        puts "No compatible popup notification system installed."
+        puts "Try installing these:\n* growl"
+      end
     elsif RUBY_PLATFORM =~ /mswin/
-      Snarl.show_message(title, message, image)
+      begin
+        require 'snarl'
+      rescue LoadError
+        puts 'To be notified by a popup please install Snarl and a ruby gem "snarl".'
+      else
+        Snarl.show_message(title, message, image)
+      end
     elsif RUBY_PLATFORM =~ /(linux|freebsd)/
       # if osd_cat is avaible
       if `which osd_cat` && $? == 0
