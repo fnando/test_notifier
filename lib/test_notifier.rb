@@ -24,10 +24,23 @@ module TestNotifier
     elsif RUBY_PLATFORM =~ /mswin/
       Snarl.show_message(title, message, image)
     elsif RUBY_PLATFORM =~ /(linux|freebsd)/
-      system("notify-send -i #{image} #{title} \"#{message}\"")
+      # if osd_cat is avaible
+      if `which osd_cat` && $? == 0
+        OsdCat.send "#{title} \n #{message}"
+      # if dcop server is running
+      elsif `ps -Al | grep dcop` && $? == 0
+        def self.knotify title, msg
+          system "dcop knotify default notify " +
+               "eventname \'#{title}\' \'#{msg}\' '' '' 16 2"
+        end
+        knotify title, message
+      # if notify-send is avaible
+      elsif `which notify-send` && $? == 0
+        system("notify-send -i #{image} #{title} \"#{message}\"")
+      end
     end
   end
-  
+
   def self.rspec?(content)
     (RSPEC_REGEX =~ content)
   end
@@ -74,5 +87,28 @@ module TestNotifier
     
     message = "#{t} tests, #{a} assertions, #{f} failures, #{e} errors"
     notify(image, title, message)
+  end
+end
+
+# Provides a method for popup notifications using osd_cat
+# Extracted from http://theadmin.org/articles/2008/2/10/fail-loudly-with-osd_cat-and-autotest
+module OsdCat
+  # TODO move this module to a separate file
+
+  # Use xlsfonts to find the different fonts
+  FONT = "-bitstream-charter-bold-r-normal--33-240-100-100-p-206-iso8859-1"
+
+  # Will display the message on the top of the screen centered, adjust these numbers to suit.
+  POSITION = "top"             # top|middle|bottom
+  POSITION_OFFSET = "0"         # Pixels from position to display (think CSS margin)
+  ALIGN = "center"             # left|right|center
+
+  def self.send msg, color='green'
+    osd_command = "echo #{msg.inspect} | osd_cat --font=#{FONT} --shadow=0 --pos=#{POSITION} -o #{POSITION_OFFSET} --delay=4 --outline=4 --align=#{ALIGN} -c #{color}"
+
+    # osd_cat blocks so start a new thread, otherwise Autotest will wait
+    Thread.new do
+      `#{osd_command}`
+    end
   end
 end
