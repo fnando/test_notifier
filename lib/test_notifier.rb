@@ -26,7 +26,17 @@ module TestNotifier
     elsif RUBY_PLATFORM =~ /(linux|freebsd)/
       # if osd_cat is avaible
       if `which osd_cat` && $? == 0
-        OsdCat.send "#{title} \n #{message}"
+        color = case image
+          when /#{PASSED_IMAGE}/
+            'green'
+          when /#{FAILURE_IMAGE}/
+            'orange'
+          when /#{ERROR_IMAGE}/
+            'red'
+        else
+          'white'
+        end
+        OsdCat.send "#{title} \n #{message}", color
       # if dcop server is running
       elsif `ps -Al | grep dcop` && $? == 0
         def self.knotify title, msg
