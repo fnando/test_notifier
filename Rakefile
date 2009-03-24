@@ -1,11 +1,12 @@
-require 'rake'
+require "rubygems"
+require "rake"
 
 PKG_FILES = %w(Rakefile test_notifier.gemspec History.txt License.txt README.markdown TODO.txt) + 
   Dir["lib/**/*"]
 
 spec = Gem::Specification.new do |s|
   s.name = "test_notifier"
-  s.version = "0.0.10"
+  s.version = "0.1.0"
   s.summary = "Display system notifications (dbus, growl and snarl) after running tests."
   s.authors = ["Nando Vieira"]
   s.email = ["fnando.vieira@gmail.com"]
@@ -33,7 +34,7 @@ namespace :gem do
     spec.instance_variables.each do |ivar|
       value = spec.instance_variable_get(ivar)
       name  = ivar.split("@").last
-      value = Time.now if name == "date"
+      next if name == "date"
       
       next if skip_fields.include?(name) || value.nil? || value == "" || (value.respond_to?(:empty?) && value.empty?)
       if name == "dependencies"

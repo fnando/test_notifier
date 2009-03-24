@@ -2,7 +2,6 @@
 # RUN : 'rake gem:update_gemspec'
 
 Gem::Specification.new do |s|
-  s.date = "Sat Sep 27 15:24:55 -0300 2008"
   s.authors = ["Nando Vieira"]
   s.require_paths = ["lib"]
   s.required_rubygems_version = ">= 0"
@@ -19,11 +18,12 @@ Gem::Specification.new do |s|
  "lib/test_notifier/icons/error.png",
  "lib/test_notifier/icons/failure.png",
  "lib/test_notifier/icons/passed.png",
+ "lib/test_notifier/register-growl.scpt",
  "lib/test_notifier/rspec.rb",
  "lib/test_notifier/test_unit.rb",
  "lib/test_notifier.rb"]
   s.email = ["fnando.vieira@gmail.com"]
-  s.version = "0.0.10"
+  s.version = "0.1.0"
   s.homepage = "http://github.com/fnando/test_notifier"
   s.requirements = ["You'll need Growl (Mac OS X), Libnotify (Linux) or Snarl (Windows)"]
   s.name = "test_notifier"

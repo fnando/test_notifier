@@ -1,13 +1,10 @@
-test_notifier
+test\_notifier
 =============
-
-* [http://github.com/fnando/test_notifier](http://github.com/fnando/test_notifier)
 
 DESCRIPTION:
 ------------
 
-Inspired by 
-http://railstips.org/2007/7/23/autotest-growl-pass-fail-notifications
+Inspired by <http://railstips.org/2007/7/23/autotest-growl-pass-fail-notifications>
 
 After using Growl notification, I decided to write my own plugin because I have
 to work on Ubuntu and Mac OS X and I missed the notification on my Linux box. 
@@ -21,28 +18,36 @@ file anyway in order to clean up the failures/errors).
 INSTALLATION:
 -------------
 
-###Mac OS X
+### Mac OS X
 
-1) Install Growl (http://growl.info/)
-2) Install the growlnotify script located on the "Extras" directory
-3) Open the Growl Preference Page (System > Growl) and activate the
+1. Install Growl (<http://growl.info/>)
+2. Install the growlnotify script located on the "Extras" directory
+3. Open the Growl Preference Page (System > Growl) and activate the
 options "Listen for incoming notifications" and "Allow remote 
 application registration" on the Network tab.
 
-###Linux
+### Linux
 
-1) Install libnotify-bin ant its dependencies:
+If you're a linux guy, you can choose on of these methods:
+
+1. Install libnotify-bin and its dependencies:
 	
-	aptitude install libnotify-bin
+	sudo aptitude install libnotify-bin
 
-###Windows
+2. Install xosd-bin
 
-1) Install Snarl: download from http://www.fullphat.net/
-2) Install ruby-snarl:
+    sudo aptitude install xosd-bin
+    
+3. KDE users don't need to install anything: test\_notifier will use `knotify`.
+
+### Windows
+
+1. Install Snarl: download from <http://www.fullphat.net/>
+2. Install ruby-snarl:
 
 	gem install ruby-snarl
 
-###All
+### All
 
 Then, install the gem:
 
@@ -58,7 +63,9 @@ USAGE:
 ------
 
 If you're using Test::Unit you should add `require "test_notifier/test_unit"`
+
 If you're using RSpec you should add `require "test_notifier/rspec"`
+
 If you're using Autotest you should add `require "test_notifier/autotest"` to
 the file `~/.autotest`
 
@@ -68,7 +75,12 @@ and save the images `none.png`, `passed.png`, `failure.png` and `error.png`.
 MAINTAINER
 ----------
  
-* Nando Vieira ([http://simplesideias.com.br](http://simplesideias.com.br))
+* Nando Vieira (<http://simplesideias.com.br>)
+
+COLLABORATORS
+-------------
+
+* jeznet (<http://github.com/jeznet>)
 
 LICENSE:
 --------

@@ -11,6 +11,8 @@ module TestNotifier
   RSPEC_REGEX = /(\d+) examples?, (\d+) failures?(, (\d+) pendings?)?/
   TEST_UNIT_REGEX = /(\d+)\stests,\s(\d+)\sassertions,\s(\d+)\sfailures,\s(\d+)\serrors/
   
+  GROWL_REGISTER_FILE = File.expand_path("~/.test_notifier-growl")
+  
   def self.notify(image, title, message)
     image ||= "none.png"
     
@@ -19,6 +21,11 @@ module TestNotifier
 
     if RUBY_PLATFORM =~ /darwin/
       if `ps -Al | grep GrowlHelper` && `which growlnotify` && $? == 0
+        unless File.file?(GROWL_REGISTER_FILE)
+          script = File.dirname(__FILE__) + "/test_notifier/register-growl.scpt"
+          system "osascript #{script} > #{GROWL_REGISTER_FILE}"
+        end
+        
         system("growlnotify -n test_notifier --image #{image} -p 2 -m \"#{message}\" -t \"#{title}\"")
       else
         puts "No compatible popup notification system installed."
