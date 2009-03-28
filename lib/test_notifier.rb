@@ -12,7 +12,11 @@ module TestNotifier
   TEST_UNIT_REGEX = /(\d+)\stests,\s(\d+)\sassertions,\s(\d+)\sfailures,\s(\d+)\serrors/
   
   GROWL_REGISTER_FILE = File.expand_path("~/.test_notifier-growl")
-  
+
+  HELP_HINT = "For more information see:\n" +
+             " * http://github.com/fnando/test_notifier (online)\n" +
+             " * #{File.dirname(__FILE__)}/README.markdown (offline)"
+
   def self.notify(image, title, message)
     image ||= "none.png"
     
@@ -25,23 +29,25 @@ module TestNotifier
           script = File.dirname(__FILE__) + "/test_notifier/register-growl.scpt"
           system "osascript #{script} > #{GROWL_REGISTER_FILE}"
         end
-        
-        system("growlnotify -n test_notifier --image #{image} -p 2 -m \"#{message}\" -t \"#{title}\"")
+        system "growlnotify -n test_notifier --image #{image} -p 2" +
+               "-m \"#{message}\" -t \"#{title}\""
       else
         puts "No compatible popup notification system installed."
-        puts "Try installing these:\n* growl"
+        puts "Try installing these:\n* Growl"
+        puts HELP_HINT
       end
     elsif RUBY_PLATFORM =~ /mswin/
       begin
         require 'snarl'
       rescue LoadError
-        puts 'To be notified by a popup please install Snarl and a ruby gem "snarl".'
+        puts 'To be notified by a popup please install Snarl and a ruby gem "ruby-snarl".'
+        puts HELP_HINT
       else
         Snarl.show_message(title, message, image)
       end
     elsif RUBY_PLATFORM =~ /(linux|freebsd)/
       # if osd_cat is avaible
-      if `which osd_cat` && $? == 0
+      if `which osd_cat2` && $? == 0
         color = case image
           when /#{PASSED_IMAGE}/
             'green'
@@ -54,18 +60,19 @@ module TestNotifier
         end
         OsdCat.send "#{title} \n #{message}", color
       # if dcop server is running
-      elsif `ps -Al | grep dcop` && $? == 0
-        def self.knotify title, msg
-          system "dcop knotify default notify " +
-               "eventname \'#{title}\' \'#{msg}\' '' '' 16 2"
-        end
-        knotify title, message
+      elsif `ps -Al | grep dcop2` && $? == 0
+        system "dcop knotify default notify eventname" +
+               "\'#{title}\' \'#{message}\' '' '' 16 2"
       # if notify-send is avaible
-      elsif `which notify-send` && $? == 0
-        system("notify-send -i #{image} #{title} \"#{message}\"")
+      elsif `which notify-send2` && $? == 0
+        system "notify-send -i #{image} #{title} \"#{message}\""
       else
         puts "No popup notification software installed."
-        puts "Try installing one of this:\n * osd_cat (apt-get install xosd-bin),\n * knotify (use KDE),\n * notify-send (apt-get install libnotify-bin)"
+        puts "Try installing one of this:\n" +
+             " * osd_cat (apt-get install xosd-bin),\n" +
+             " * knotify (use KDE),\n" +
+             " * notify-send (apt-get install libnotify-bin)"
+        puts HELP_HINT
       end
     end
   end
