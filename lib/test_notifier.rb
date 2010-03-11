@@ -60,6 +60,9 @@ module TestNotifier
                "eventname \'#{title}\' \'#{msg}\' '' '' 16 2"
         end
         knotify title, message
+      # if kdialog is available
+      elsif `which kdialog` && $? == 0
+        system("kdialog --title #{title} --passivepopup \"#{message}\" 5")
       # if notify-send is avaible
       elsif `which notify-send` && $? == 0
         system("notify-send -i #{image} #{title} \"#{message}\"")
