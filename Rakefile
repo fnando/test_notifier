@@ -5,7 +5,7 @@ JEWEL = Jeweler::Tasks.new do |gem|
   gem.email = "fnando.vieira@gmail.com"
   gem.homepage = "http://github.com/fnando/test_notifier"
   gem.authors = ["Nando Vieira"]
-  gem.version = "0.1.1"
+  gem.version = "0.1.2"
   gem.summary = "Display system notifications (dbus, growl and snarl) after running tests."
   gem.description = <<-TEXT
 Display system notifications (dbus, growl and snarl) after
