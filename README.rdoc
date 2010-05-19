@@ -25,7 +25,7 @@ If you're a linux guy, you can choose on of these methods:
 
 * Install libnotify-bin and its dependencies: <tt>sudo aptitude install libnotify-bin</tt>
 * Install xosd-bin: <tt>sudo aptitude install xosd-bin</tt>
-* KDE users don't need to install anything: Test Notifier will use +knotify+.
+* KDE users don't need to install anything: Test Notifier will use +knotify+ and in in KDE4 Test Notifier will use +kdialog+.
 
 === Windows
 
@@ -54,7 +54,7 @@ and save the images <tt>none.png</tt>, <tt>passed.png<tt>, <tt>failure.png</tt> 
 
 == Collaborators
 
-* jeznet - http://github.com/jeznet
+* Szymon (jeznet) Jeż - http://github.com/jeznet
 * Steve Halasz - http://github.com/woodchuck
 
 == License
