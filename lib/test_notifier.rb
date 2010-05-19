@@ -61,8 +61,14 @@ module TestNotifier
         OsdCat.send "#{title} \n #{message}", color
       # if dcop server is running
       elsif `ps -Al | grep dcop` && $? == 0
-        system "dcop knotify default notify eventname" +
-               "\'#{title}\' \'#{message}\' '' '' 16 2"
+        def self.knotify title, msg
+          system "dcop knotify default notify " +
+               "eventname \'#{title}\' \'#{msg}\' '' '' 16 2"
+        end
+        knotify title, message
+      # if kdialog is available
+      elsif `which kdialog` && $? == 0
+        system("kdialog --title #{title} --passivepopup \"#{message}\" 5")
       # if notify-send is avaible
       elsif `which notify-send` && $? == 0
         system "notify-send -i #{image} #{title} \"#{message}\""
@@ -71,6 +77,7 @@ module TestNotifier
         puts "Try installing one of this:\n" +
              " * osd_cat (apt-get install xosd-bin),\n" +
              " * knotify (use KDE),\n" +
+             " * kdialog (use KDE4),\n" +
              " * notify-send (apt-get install libnotify-bin)"
         puts HELP_HINT
       end
