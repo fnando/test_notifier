@@ -56,6 +56,7 @@ and save the images <tt>none.png</tt>, <tt>passed.png<tt>, <tt>failure.png</tt> 
 
 * Szymon (jeznet) Jeż - http://github.com/jeznet
 * Steve Halasz - http://github.com/woodchuck
+* Khaja Minhajuddin - http://minhajuddin.com/
 
 == License
 

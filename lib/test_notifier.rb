@@ -36,7 +36,7 @@ module TestNotifier
         puts "Try installing these:\n* Growl"
         puts HELP_HINT
       end
-    elsif RUBY_PLATFORM =~ /mswin/
+    elsif RUBY_PLATFORM =~ /(mswin|mingw)/
       begin
         require 'snarl'
       rescue LoadError
