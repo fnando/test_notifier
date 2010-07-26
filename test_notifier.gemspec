@@ -44,6 +44,7 @@ with Autotest ZenTest gem for Rails apps.
   s.homepage = %q{http://github.com/fnando/test_notifier}
   s.rdoc_options = ["--charset=UTF-8"]
   s.require_paths = ["lib"]
+  s.requirements = ["You'll need Growl (Mac OS X), Libnotify, OSD or KDE (Linux) or Snarl (Windows)"]
   s.rubygems_version = %q{1.3.7}
   s.summary = %q{Display system notifications (dbus, growl and snarl) after running tests.}
 
