@@ -1,5 +1,13 @@
+require "rake/testtask"
 require "jeweler"
 require "lib/test_notifier/version"
+
+Rake::TestTask.new do |t|
+  t.libs += %w[test lib]
+  t.ruby_opts = %w[-rubygems]
+  t.test_files = FileList["test/**/*_test.rb"]
+  t.verbose = true
+end
 
 JEWEL = Jeweler::Tasks.new do |gem|
   gem.name = "test_notifier"
