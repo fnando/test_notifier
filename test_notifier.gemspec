@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = %q{test_notifier}
-  s.version = "0.2.1"
+  s.version = "0.3.0"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Nando Vieira"]
-  s.date = %q{2010-08-22}
+  s.date = %q{2010-08-27}
   s.description = %q{Display system notifications (dbus, growl and snarl) after
 running tests. It works on Mac OS X, Linux and Windows. Powerful when used
 with Autotest ZenTest gem for Rails apps.
@@ -47,6 +47,11 @@ with Autotest ZenTest gem for Rails apps.
   s.requirements = ["You'll need Growl (Mac OS X), Libnotify, OSD or KDE (Linux) or Snarl (Windows)"]
   s.rubygems_version = %q{1.3.7}
   s.summary = %q{Display system notifications (dbus, growl and snarl) after running tests.}
+  s.test_files = [
+    "test/notifier_test.rb",
+     "test/test_helper.rb",
+     "test/test_notifier_test.rb"
+  ]
 
   if s.respond_to? :specification_version then
     current_version = Gem::Specification::CURRENT_SPECIFICATION_VERSION
