@@ -16,7 +16,8 @@ module TestNotifier
 
   TITLES = {
     :fail    => "Failed!",
-    :success => "Passed!"
+    :success => "Passed!",
+    :error   => "Error!"
   }
 
   def notify(options)
@@ -39,6 +40,7 @@ module TestNotifier
     end
   end
 
-  autoload :Notifier, "test_notifier/notifier"
-  autoload :Runner,   "test_notifier/runner"
+  autoload :Notifier,   "test_notifier/notifier"
+  autoload :Runner,     "test_notifier/runner"
+  autoload :Stats,      "test_notifier/stats"
 end

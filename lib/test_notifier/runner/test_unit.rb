@@ -10,12 +10,11 @@ class Test::Unit::UI::Console::TestRunner
     begin
       re = /(\d+) tests, (\d+) assertions, (\d+) failures, (\d+) errors/
       _, tests, assertions, failures, errors = *@result.to_s.match(re)
+      return if tests.to_i.zero?
 
-      return if tests.to_i == 0
 
-      status = (failures.to_i + errors.to_i) > 0 ? :fail : :success
-      message = "#{tests} tests, #{assertions} assertions, #{failures} failures, #{errors} errors"
-      TestNotifier.notify(:status => status, :message => message)
+      stats = TestNotifier::Stats.new(:test_unit, :total => tests, :assertions => assertions, :fail => failures, :error => errors)
+      TestNotifier.notify(:status => stats.status, :message => stats.message)
     rescue
     end
   end

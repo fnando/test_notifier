@@ -9,7 +9,8 @@ module TestNotifier
       ALIGN = "center"
       COLORS = {
         :fail => "orange",
-        :success => "green"
+        :success => "green",
+        :error => "red"
       }
 
       def supported?

@@ -16,7 +16,14 @@ Autotest.add_hook :ran_command do |at|
     elsif test_unit_matches
       _, tests, assertions, failures, errors = *test_unit_matches
 
-      status = failures.to_i > 0 ? :fail : :success
+      if errors.to_i.nonzero?
+        status = :error
+      elsif failures.to_i.nonzero?
+        status = :fail
+      else
+        status = :success
+      end
+
       message = "#{tests} tests, #{assertions} assertions, #{failures} failures, #{errors} errors"
       TestNotifier.notify(:status => status, :message => message) unless tests.to_i.zero?
     end

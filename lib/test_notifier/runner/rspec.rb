@@ -4,15 +4,18 @@ require "rspec/core/formatters/base_text_formatter"
 class RSpec::Core::Formatters::BaseTextFormatter
   alias dump_summary_original dump_summary
 
-  def dump_summary(duration, examples, failed, pending)
-    dump_summary_original(duration, examples, failed, pending)
+  def dump_summary(duration, example_count, failure_count, pending_count)
+    dump_summary_original(duration, example_count, failure_count, pending_count)
 
-    begin
-      return if examples == 0
-      status = failed > 0 ? :fail : :success
-      message = "#{examples} examples, #{failed} failed, #{pending} pending"
-      TestNotifier.notify(:status => status, :message => message)
-    rescue
-    end
+    return if example_count.zero?
+
+    stats = TestNotifier::Stats.new(:rspec, {
+      :total   => example_count,
+      :fail    => failure_count,
+      :pending => pending_count,
+      :error   => examples.reject {|e| e.instance_variable_get("@exception").nil?}.count
+    })
+
+    TestNotifier.notify(:status => stats.status, :message => stats.message)
   end
 end

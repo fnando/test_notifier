@@ -35,8 +35,10 @@ with Autotest ZenTest gem for Rails apps.
      "lib/test_notifier/runner/rspec.rb",
      "lib/test_notifier/runner/spec.rb",
      "lib/test_notifier/runner/test_unit.rb",
+     "lib/test_notifier/stats.rb",
      "lib/test_notifier/test_unit.rb",
      "lib/test_notifier/version.rb",
+     "resources/error.png",
      "resources/fail.png",
      "resources/register-growl.scpt",
      "resources/success.png"
@@ -49,6 +51,7 @@ with Autotest ZenTest gem for Rails apps.
   s.summary = %q{Display system notifications (dbus, growl and snarl) after running tests.}
   s.test_files = [
     "test/notifier_test.rb",
+     "test/stats_test.rb",
      "test/test_helper.rb",
      "test/test_notifier_test.rb"
   ]
