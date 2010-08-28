@@ -19,14 +19,14 @@ module TestNotifier
 
     private
     def normalize(options)
-      [:total, :success, :fail, :pending, :error, :assertions].inject({}) do |buffer, key|
+      [:total, :success, :fail, :pending, :errors, :assertions].inject({}) do |buffer, key|
         buffer[key] = options[key].to_i
         buffer
       end
     end
 
     def status_for_test_unit
-      if options[:error].nonzero?
+      if options[:errors].nonzero?
         :error
       elsif options[:fail].nonzero?
         :fail
@@ -36,7 +36,7 @@ module TestNotifier
     end
 
     def status_for_rspec
-      if options[:error].nonzero?
+      if options[:errors].nonzero?
         :error
       elsif options[:fail].nonzero?
         :fail
@@ -55,13 +55,13 @@ module TestNotifier
 
     def message_for_rspec
       options[:success] = options[:total] - options[:fail]
-      options[:fail] =  options[:fail] - options[:error]
+      options[:fail] =  options[:fail] - options[:errors]
 
       text = []
       text << "#{options[:total]} " + pluralize(options[:total], "example")
       text << "#{options[:fail]} failed" unless options[:fail].zero?
       text << "#{options[:pending]} pending" unless options[:pending].zero?
-      text << "#{options[:error]} " + pluralize(options[:error], "error") unless options[:error].zero?
+      text << "#{options[:errors]} " + pluralize(options[:errors], "error") unless options[:errors].zero?
       text.join(", ")
     end
 
@@ -78,7 +78,7 @@ module TestNotifier
       text << "#{options[:total]} " + pluralize(options[:total], "test")
       text << "#{options[:assertions]} " + pluralize(options[:assertions], "assertion")
       text << "#{options[:fail]} failed" unless options[:fail].zero?
-      text << "#{options[:error]} " + pluralize(options[:error], "error") unless options[:error].zero?
+      text << "#{options[:errors]} " + pluralize(options[:errors], "error") unless options[:errors].zero?
       text.join(", ")
     end
 

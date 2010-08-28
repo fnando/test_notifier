@@ -13,7 +13,7 @@ class RSpec::Core::Formatters::BaseTextFormatter
       :total   => example_count,
       :fail    => failure_count,
       :pending => pending_count,
-      :error   => examples.reject {|e| e.instance_variable_get("@exception").nil?}.count
+      :errors  => examples.reject {|e| e.instance_variable_get("@exception").nil?}.count
     })
 
     TestNotifier.notify(:status => stats.status, :message => stats.message)
