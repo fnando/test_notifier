@@ -10,17 +10,23 @@ Autotest.add_hook :ran_command do |at|
     if rspec_matches
       _, examples, failures, _, pending = *rspec_matches
 
-      stats = TestNotifier::Stats.new(:spec, :total => examples, :fail => failures, :pending => pending)
+      stats = TestNotifier::Stats.new(:spec, {
+        :count    => examples,
+        :failures => failures,
+        :pending  => pending
+      })
+
       TestNotifier.notify(:status => stats.status, :message => stats.message) unless examples.to_i.zero?
     elsif test_unit_matches
       _, tests, assertions, failures, errors = *test_unit_matches
 
       stats = TestNotifier::Stats.new(:test_unit, {
-        :total => tests,
+        :count      => tests,
         :assertions => assertions,
-        :fail => failures,
-        :errors => errors
+        :failures   => failures,
+        :errors     => errors
       })
+
       TestNotifier.notify(:status => stats.status, :message => stats.message) unless tests.to_i.zero?
     end
   rescue

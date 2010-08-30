@@ -19,7 +19,7 @@ module TestNotifier
 
     private
     def normalize(options)
-      [:total, :success, :fail, :pending, :errors, :assertions].inject({}) do |buffer, key|
+      [:count, :success, :failures, :pending, :errors, :assertions].inject({}) do |buffer, key|
         buffer[key] = options[key].to_i
         buffer
       end
@@ -28,7 +28,7 @@ module TestNotifier
     def status_for_test_unit
       if options[:errors].nonzero?
         :error
-      elsif options[:fail].nonzero?
+      elsif options[:failures].nonzero?
         :fail
       else
         :success
@@ -38,7 +38,7 @@ module TestNotifier
     def status_for_rspec
       if options[:errors].nonzero?
         :error
-      elsif options[:fail].nonzero?
+      elsif options[:failures].nonzero?
         :fail
       else
         :success
@@ -46,7 +46,7 @@ module TestNotifier
     end
 
     def status_for_spec
-      if options[:fail].nonzero?
+      if options[:failures].nonzero?
         :fail
       else
         :success
@@ -54,12 +54,11 @@ module TestNotifier
     end
 
     def message_for_rspec
-      options[:success] = options[:total] - options[:fail]
-      options[:fail] =  options[:fail] - options[:errors]
+      options[:success] = options[:count] - (options[:failures] + options[:errors])
 
       text = []
-      text << "#{options[:total]} " + pluralize(options[:total], "example")
-      text << "#{options[:fail]} failed" unless options[:fail].zero?
+      text << "#{options[:count]} " + pluralize(options[:count], "example")
+      text << "#{options[:failures]} failed" unless options[:failures].zero?
       text << "#{options[:pending]} pending" unless options[:pending].zero?
       text << "#{options[:errors]} " + pluralize(options[:errors], "error") unless options[:errors].zero?
       text.join(", ")
@@ -67,17 +66,17 @@ module TestNotifier
 
     def message_for_spec
       text = []
-      text << "#{options[:total]} " + pluralize(options[:total], "example")
-      text << "#{options[:fail]} failed" unless options[:fail].zero?
+      text << "#{options[:count]} " + pluralize(options[:count], "example")
+      text << "#{options[:failures]} failed" unless options[:failures].zero?
       text << "#{options[:pending]} pending" unless options[:pending].zero?
       text.join(", ")
     end
 
     def message_for_test_unit
       text = []
-      text << "#{options[:total]} " + pluralize(options[:total], "test")
+      text << "#{options[:count]} " + pluralize(options[:count], "test")
       text << "#{options[:assertions]} " + pluralize(options[:assertions], "assertion")
-      text << "#{options[:fail]} failed" unless options[:fail].zero?
+      text << "#{options[:failures]} failed" unless options[:failures].zero?
       text << "#{options[:errors]} " + pluralize(options[:errors], "error") unless options[:errors].zero?
       text.join(", ")
     end

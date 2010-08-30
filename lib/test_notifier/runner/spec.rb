@@ -10,12 +10,12 @@ class Spec::Runner::Formatter::BaseTextFormatter
     return if example_count.zero?
 
     stats = TestNotifier::Stats.new(:spec, {
-      :total   => example_count,
-      :fail    => failure_count,
-      :pending => pending_count,
-      :error   => nil
+      :count    => example_count,
+      :failures => failure_count,
+      :pending  => pending_count,
+      :errors   => nil
     })
 
-    TestNotifier.notify(:status => stats.status, :message => stats.message) if example_count > 0
+    TestNotifier.notify(:status => stats.status, :message => stats.message)
   end
 end

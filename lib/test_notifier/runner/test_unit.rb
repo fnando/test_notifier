@@ -13,7 +13,13 @@ class Test::Unit::UI::Console::TestRunner
       return if tests.to_i.zero?
 
 
-      stats = TestNotifier::Stats.new(:test_unit, :total => tests, :assertions => assertions, :fail => failures, :error => errors)
+      stats = TestNotifier::Stats.new(:test_unit, {
+        :count      => tests,
+        :assertions => assertions,
+        :failures   => failures,
+        :errors     => errors
+      })
+
       TestNotifier.notify(:status => stats.status, :message => stats.message)
     rescue
     end
