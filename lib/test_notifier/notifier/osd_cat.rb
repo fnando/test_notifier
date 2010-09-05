@@ -14,7 +14,7 @@ module TestNotifier
       }
 
       def supported?
-        RUBY_PLATFORM =~ /(linux|freebsd)/ && `which osd_cat` && $? == 0
+        RUBY_PLATFORM =~ /(linux|freebsd)/ && `which osd_cat >/dev/null 2>/dev/null` && $? == 0
       end
 
       def notify(options)
