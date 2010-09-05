@@ -1,3 +1,5 @@
+$LOAD_PATH << '.'  unless $LOAD_PATH.include?('.')
+
 require "rake/testtask"
 require "jeweler"
 require "lib/test_notifier/version"
