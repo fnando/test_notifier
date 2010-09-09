@@ -4,7 +4,7 @@ module TestNotifier
       extend self
 
       def supported?
-        RUBY_PLATFORM =~ /(linux|freebsd)/ && `which kdialog` && $? == 0
+        RUBY_PLATFORM =~ /(linux|freebsd)/ && `which kdialog &> /dev/null` && $? == 0
       end
 
       def notify(options)

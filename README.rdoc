@@ -60,6 +60,7 @@ The available notifiers are <tt>:growl</tt>, <tt>:kdialog</tt>, <tt>:knotify</tt
 * Szymon (jeznet) Jeż - http://github.com/jeznet
 * Steve Halasz - http://github.com/woodchuck
 * Khaja Minhajuddin - http://minhajuddin.com/
+* Steve Sloan - http://github.com/CodeMonkeySteve
 
 == License
 
