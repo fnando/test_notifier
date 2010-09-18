@@ -6,6 +6,7 @@ module TestNotifier
     autoload :Knotify,    "test_notifier/notifier/knotify"
     autoload :Kdialog,    "test_notifier/notifier/kdialog"
     autoload :NotifySend, "test_notifier/notifier/notify_send"
+    autoload :Placebo,    "test_notifier/notifier/placebo"
 
     extend self
 
@@ -21,7 +22,7 @@ module TestNotifier
 
     def from_name(name)
       notifier = const_get(classify(name.to_s))
-    rescue NameError
+    rescue Exception
       nil
     end
 

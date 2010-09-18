@@ -13,7 +13,7 @@ class TestNotifier::NotifierTest < Test::Unit::TestCase
   end
 
   test "retrieve list of all notifiers" do
-    assert_equal 6, TestNotifier::Notifier.notifiers.size
+    assert_equal 7, TestNotifier::Notifier.notifiers.size
   end
 
   test "return notifier by its name" do

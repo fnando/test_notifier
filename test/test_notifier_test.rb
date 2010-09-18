@@ -20,10 +20,11 @@ class TestNotifierTest < Test::Unit::TestCase
     assert_equal TestNotifier::Notifier::Snarl, TestNotifier.notifier
   end
 
-  test "raise error when there's no supported notifier" do
-    assert_raise TestNotifier::UnsupportedNotifierError do
-      TestNotifier.notifier
-    end
+  test "output error message to $stderr when there's no supported notifier" do
+    STDERR.expects(:<<).with(TestNotifier::NO_NOTIFIERS_MESSAGE).once
+    TestNotifier::Notifier::Placebo.expects(:supported?).returns(true)
+    TestNotifier::Notifier::Placebo.expects(:notify).once
+    TestNotifier.notify :status => :fail, :message => "You have failed!"
   end
 
   test "send notification to supported notifier" do

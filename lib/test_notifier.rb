@@ -6,7 +6,7 @@ module TestNotifier
 
   extend self
 
-  class UnsupportedNotifierError < StandardError; end
+  NO_NOTIFIERS_MESSAGE = "[TEST NOTIFIER] You have no supported notifiers installed. Please read documentation."
 
   IMAGES = {
     :fail    => File.dirname(__FILE__) + "/../resources/fail.png",
@@ -31,11 +31,11 @@ module TestNotifier
 
   def notifier
     self.__notifier__ ||= begin
-      notifier = nil
-      notifier = TestNotifier::Notifier.supported_notifier_from_name(default_notifier) if default_notifier
-      notifier = TestNotifier::Notifier.supported_notifiers.first unless notifier
+      notifier = TestNotifier::Notifier.supported_notifier_from_name(default_notifier)
+      notifier ||= TestNotifier::Notifier.supported_notifiers.first
 
-      raise UnsupportedNotifierError, "You have no supported notifiers installed. Please read documentation." unless notifier
+      STDERR << NO_NOTIFIERS_MESSAGE if notifier == TestNotifier::Notifier::Placebo
+
       notifier
     end
   end
