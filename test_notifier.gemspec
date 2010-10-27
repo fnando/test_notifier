@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = %q{test_notifier}
-  s.version = "0.3.4"
+  s.version = "0.3.5.rc.1"
 
-  s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
+  s.required_rubygems_version = Gem::Requirement.new("> 1.3.1") if s.respond_to? :required_rubygems_version=
   s.authors = ["Nando Vieira"]
-  s.date = %q{2010-09-09}
+  s.date = %q{2010-10-27}
   s.description = %q{  Display system notifications (dbus, growl and snarl) after
   running tests. It works on Mac OS X, Linux and Windows. Powerful when used
   with Autotest ZenTest gem for Rails apps.
@@ -28,6 +28,7 @@ Gem::Specification.new do |s|
      "lib/test_notifier/notifier/knotify.rb",
      "lib/test_notifier/notifier/notify_send.rb",
      "lib/test_notifier/notifier/osd_cat.rb",
+     "lib/test_notifier/notifier/placebo.rb",
      "lib/test_notifier/notifier/snarl.rb",
      "lib/test_notifier/rspec.rb",
      "lib/test_notifier/runner.rb",
