@@ -16,7 +16,7 @@ begin
     gem.email = "fnando.vieira@gmail.com"
     gem.homepage = "http://github.com/fnando/test_notifier"
     gem.authors = ["Nando Vieira"]
-    gem.version = TestNotifier::Version::STRING
+    gem.version = "#{TestNotifier::Version::STRING}.rc.1"
     gem.summary = "Display system notifications (dbus, growl and snarl) after running tests."
     gem.description = <<-TEXT
   Display system notifications (dbus, growl and snarl) after
