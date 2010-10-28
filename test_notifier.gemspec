@@ -9,7 +9,7 @@ Gem::Specification.new do |s|
 
   s.required_rubygems_version = Gem::Requirement.new("> 1.3.1") if s.respond_to? :required_rubygems_version=
   s.authors = ["Nando Vieira"]
-  s.date = %q{2010-10-27}
+  s.date = %q{2010-10-28}
   s.description = %q{  Display system notifications (dbus, growl and snarl) after
   running tests. It works on Mac OS X, Linux and Windows. Powerful when used
   with Autotest ZenTest gem for Rails apps.
