@@ -16,6 +16,10 @@ class TestNotifier::NotifierTest < Test::Unit::TestCase
     assert_equal 7, TestNotifier::Notifier.notifiers.size
   end
 
+  test "consider Placebo as fallback notifier" do
+    assert_equal TestNotifier::Notifier::Placebo, TestNotifier::Notifier.notifiers.last
+  end
+
   test "return notifier by its name" do
     assert_equal TestNotifier::Notifier::OsdCat, TestNotifier::Notifier.from_name(:osd_cat)
     assert_equal TestNotifier::Notifier::NotifySend, TestNotifier::Notifier.from_name(:notify_send)
