@@ -26,6 +26,9 @@ begin
 
     gem.files =  FileList["{README}.rdoc", "{lib,resources}/**/*"]
     gem.requirements << "You'll need Growl (Mac OS X), Libnotify, OSD or KDE (Linux) or Snarl (Windows)"
+
+    gem.add_development_dependency "test-unit"
+    gem.add_development_dependency "mocha"
   end
 
   Jeweler::GemcutterTasks.new
