@@ -1,5 +1,5 @@
 require "test_notifier"
-require "rspec/core/formatters"
+require "rspec/core/formatters/base_text_formatter"
 
 class RSpec::Core::Formatters::BaseTextFormatter
   alias dump_summary_original dump_summary
