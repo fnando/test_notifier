@@ -13,28 +13,9 @@ file anyway in order to clean up the failures/errors).
 
 == Installation
 
-=== Mac OS X
+  gem install test_notifier
 
-* Install Growl - http://growl.info/
-* Install the growlnotify script located on the "Extras" directory
-* Open the Growl Preference Panel (System > Growl) and activate "Listen for incoming notifications" and "Allow remote application registration" options on the Network tab.
-
-=== Linux
-
-If you're a linux guy, you can choose on of these methods:
-
-* Install libnotify-bin and its dependencies: <tt>sudo aptitude install libnotify-bin</tt>
-* Install xosd-bin: <tt>sudo aptitude install xosd-bin</tt>
-* KDE users don't need to install anything: Test Notifier will use +knotify+ and in in KDE4 Test Notifier will use +kdialog+.
-
-=== Windows
-
-* Install Snarl: download from http://www.fullphat.net
-* Install ruby-snarl: <tt>gem install ruby-snarl</tt>
-
-=== All
-
-Then, install the gem with <tt>sudo gem install test_notifier</tt>
+Check http://github.com/fnando/notifier to see how you can configure a notifier for your OS.
 
 == Usage
 
