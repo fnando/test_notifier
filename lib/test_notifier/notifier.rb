@@ -11,9 +11,8 @@ module TestNotifier
     extend self
 
     def notifiers
-      constants.collect do |name|
-        const_get(name)
-      end
+      sorted_constants = constants - ['Placebo'] + ['Placebo']
+      sorted_constants.collect {|name| const_get(name)}
     end
 
     def supported_notifiers
