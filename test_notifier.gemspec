@@ -4,7 +4,7 @@ require "test_notifier/version"
 
 Gem::Specification.new do |s|
   s.name        = "test_notifier"
-  s.version     = "#{TestNotifier::Version::STRING}.rc.1"
+  s.version     = "#{TestNotifier::Version::STRING}.rc.2"
   s.platform    = Gem::Platform::RUBY
   s.authors     = ["Nando Vieira"]
   s.email       = ["fnando.vieira@gmail.com"]
