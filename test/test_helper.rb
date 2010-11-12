@@ -7,9 +7,8 @@ require "test_notifier"
 class Test::Unit::TestCase
   private
   def unsupport_all_notifiers
-    TestNotifier::Notifier.constants.each do |name|
-      notifier = TestNotifier::Notifier.const_get(name)
-      notifier.stubs(:supported?).returns(false)
+    Notifier.notifiers.each do |notifier|
+      notifier.stubs(:supported?).returns(false) unless notifier == Notifier::Placebo
     end
   end
 end

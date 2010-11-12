@@ -1,6 +1,7 @@
+require "notifier"
+
 module TestNotifier
   class << self
-    attr_accessor :__notifier__
     attr_accessor :default_notifier
   end
 
@@ -30,17 +31,12 @@ module TestNotifier
   end
 
   def notifier
-    self.__notifier__ ||= begin
-      notifier = TestNotifier::Notifier.supported_notifier_from_name(default_notifier)
-      notifier ||= TestNotifier::Notifier.supported_notifiers.first
-
-      STDERR << NO_NOTIFIERS_MESSAGE if notifier == TestNotifier::Notifier::Placebo
-
-      notifier
-    end
+    Notifier.default_notifier = default_notifier
+    notifier = Notifier.notifier
+    STDERR << NO_NOTIFIERS_MESSAGE if notifier == Notifier::Placebo
+    notifier
   end
 
-  autoload :Notifier,   "test_notifier/notifier"
   autoload :Runner,     "test_notifier/runner"
   autoload :Stats,      "test_notifier/stats"
 end
