@@ -49,7 +49,7 @@ You can define your notifier.
 
   TestNotifier.default_notifier = :growl
 
-The available notifiers are <tt>:growl</tt>, <tt>:kdialog</tt>, <tt>:knotify</tt>, <tt>:notify_send</tt>, <tt>:osd_cat</tt>, and <tt>:snarl</tt></tt>.
+The available notifiers are <tt>:growl</tt>, <tt>:kdialog</tt>, <tt>:knotify</tt>, <tt>:notify_send</tt>, <tt>:osd_cat</tt>, and <tt>:snarl</tt>.
 
 == Maintainer
 
