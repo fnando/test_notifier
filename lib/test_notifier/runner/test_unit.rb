@@ -21,7 +21,9 @@ class Test::Unit::UI::Console::TestRunner
       })
 
       TestNotifier.notify(:status => stats.status, :message => stats.message)
-    rescue
+    rescue => e
+      puts e
+      puts e.backtrace
     end
   end
 end

@@ -29,6 +29,8 @@ Autotest.add_hook :ran_command do |at|
 
       TestNotifier.notify(:status => stats.status, :message => stats.message) unless tests.to_i.zero?
     end
-  rescue
+  rescue => e
+    puts e
+    puts e.backtrace
   end
 end
