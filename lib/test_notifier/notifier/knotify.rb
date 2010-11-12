@@ -4,7 +4,7 @@ module TestNotifier
       extend self
 
       def supported?
-        RUBY_PLATFORM =~ /(linux|freebsd)/ && `ps -Al | grep dcop` && $?.exitstatus == 0
+        RUBY_PLATFORM =~ /(linux|freebsd)/ && `ps -Al | grep dcop` && $? == 0
       end
 
       def notify(options)
