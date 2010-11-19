@@ -26,7 +26,8 @@ class TestNotifierTest < Test::Unit::TestCase
       :status  => :fail,
       :message => "You have failed!",
       :title   => TestNotifier::TITLES[:fail],
-      :image   => TestNotifier::IMAGES[:fail]
+      :image   => TestNotifier::IMAGES[:fail],
+      :color   => TestNotifier::COLORS[:fail]
     })
 
     TestNotifier.notify :status => :fail, :message => "You have failed!"

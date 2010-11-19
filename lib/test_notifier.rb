@@ -21,10 +21,17 @@ module TestNotifier
     :error   => "Error!"
   }
 
+  COLORS = {
+    :fail    => "orange",
+    :success => "green",
+    :error   => "red"
+  }
+
   def notify(options)
     options.merge!({
       :title => TITLES[options[:status]],
-      :image => IMAGES[options[:status]]
+      :image => IMAGES[options[:status]],
+      :color => COLORS[options[:status]]
     })
 
     notifier.notify(options)
