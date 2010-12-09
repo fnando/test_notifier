@@ -23,7 +23,7 @@ If you're using Test::Unit you should add <tt>require "test_notifier/runner/test
 
 If you're using RSpec you should add <tt>require "test_notifier/runner/spec"</tt> to your <tt>spec_helper.rb</tt> file. If you're using RSpec 2, you need to add <tt>require "test_notifier/runner/rspec"</tt> instead.
 
-If you're using Autotest you should add <tt>require test_notifier/runner/autotest"</tt> to
+If you're using Autotest you should add <tt>require "test_notifier/runner/autotest"</tt> to
 the file <tt>~/.autotest</tt>
 
 You can define your notifier.
