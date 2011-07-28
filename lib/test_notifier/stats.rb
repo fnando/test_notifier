@@ -25,6 +25,16 @@ module TestNotifier
       end
     end
 
+    def status_for_minitest
+      if options[:errors].nonzero?
+        :error
+      elsif options[:failures].nonzero?
+        :fail
+      else
+        :success
+      end
+    end
+
     def status_for_test_unit
       if options[:errors].nonzero?
         :error
@@ -73,6 +83,15 @@ module TestNotifier
     end
 
     def message_for_test_unit
+      text = []
+      text << "#{options[:count]} " + pluralize(options[:count], "test")
+      text << "#{options[:assertions]} " + pluralize(options[:assertions], "assertion")
+      text << "#{options[:failures]} failed" unless options[:failures].zero?
+      text << "#{options[:errors]} " + pluralize(options[:errors], "error") unless options[:errors].zero?
+      text.join(", ")
+    end
+
+    def message_for_minitest
       text = []
       text << "#{options[:count]} " + pluralize(options[:count], "test")
       text << "#{options[:assertions]} " + pluralize(options[:assertions], "assertion")
