@@ -82,3 +82,29 @@ class TestNotifier::Stats::TestUnitTest < Test::Unit::TestCase
     assert_equal "6 tests, 20 assertions, 2 failed, 3 errors", @stats.message
   end
 end
+
+class TestNotifier::Stats::MiniTestTest < Test::Unit::TestCase
+  def setup
+    @stats = TestNotifier::Stats.new(:minitest)
+  end
+
+  test "success message" do
+    @stats.options = { :count => 10, :assertions => 20 }
+    assert_equal "10 tests, 20 assertions", @stats.message
+  end
+
+  test "message with failing examples" do
+    @stats.options = { :count => 10, :assertions => 20, :failures => 5 }
+    assert_equal "10 tests, 20 assertions, 5 failed", @stats.message
+  end
+
+  test "message with error examples" do
+    @stats.options = { :count => 10, :assertions => 20, :errors => 5 }
+    assert_equal "10 tests, 20 assertions, 5 errors", @stats.message
+  end
+
+  test "message with all types" do
+    @stats.options = { :count => 6, :failures => 2, :errors => 3, :assertions => 20 }
+    assert_equal "6 tests, 20 assertions, 2 failed, 3 errors", @stats.message
+  end
+end
