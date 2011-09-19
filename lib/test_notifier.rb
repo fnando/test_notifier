@@ -40,7 +40,9 @@ module TestNotifier
   def notifier
     Notifier.default_notifier = default_notifier
     notifier = Notifier.notifier
-    STDERR << NO_NOTIFIERS_MESSAGE if notifier == Notifier::Placebo && !silence_no_notifier_warning
+    if notifier == Notifier::Placebo && !silence_no_notifier_warning
+      STDERR << NO_NOTIFIERS_MESSAGE
+    end
     notifier
   end
 
