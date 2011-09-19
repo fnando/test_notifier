@@ -2,12 +2,12 @@ require "notifier"
 
 module TestNotifier
   class << self
-    attr_accessor :default_notifier
+    attr_accessor :default_notifier, :silence_no_notifier_warning
   end
 
   extend self
 
-  NO_NOTIFIERS_MESSAGE = "[TEST NOTIFIER] You have no supported notifiers installed. Please read documentation."
+  NO_NOTIFIERS_MESSAGE = "[TEST NOTIFIER] You have no supported notifiers installed. Please read documentation.\n"
 
   IMAGES = {
     :fail    => File.dirname(__FILE__) + "/../resources/fail.png",
@@ -40,7 +40,7 @@ module TestNotifier
   def notifier
     Notifier.default_notifier = default_notifier
     notifier = Notifier.notifier
-    STDERR << NO_NOTIFIERS_MESSAGE if notifier == Notifier::Placebo
+    STDERR << NO_NOTIFIERS_MESSAGE if notifier == Notifier::Placebo && !silence_no_notifier_warning
     notifier
   end
 
