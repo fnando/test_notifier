@@ -20,6 +20,14 @@ class TestNotifierTest < Test::Unit::TestCase
     TestNotifier.notify :status => :fail, :message => "You have failed!"
   end
 
+  test "output error message won't display when silence_no_notifier_warning is true" do
+    TestNotifier.silence_no_notifier_warning = true
+    STDERR.expects(:<<).with(TestNotifier::NO_NOTIFIERS_MESSAGE).never
+    Notifier::Placebo.expects(:supported?).returns(true)
+    Notifier::Placebo.expects(:notify).once
+    TestNotifier.notify :status => :fail, :message => "You have failed!"
+  end
+
   test "send notification to supported notifier" do
     Notifier::Snarl.expects(:supported?).returns(true)
     Notifier::Snarl.expects(:notify).with({
