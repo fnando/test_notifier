@@ -8,7 +8,7 @@ MiniTest::Unit.after_tests do
     :count      => runner.test_count,
     :assertions => runner.assertion_count,
     :failures   => runner.failures,
-    :errors     => runner.skips
+    :errors     => runner.errors
   })
 
   TestNotifier.notify(:status => stats.status, :message => stats.message)
