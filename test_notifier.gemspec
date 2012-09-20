@@ -13,7 +13,7 @@ Gem::Specification.new do |s|
   s.description = <<-DESC
 Display system notifications (dbus, growl and snarl) after
 running tests. It works on Mac OS X, Linux and Windows. Powerful when used
-with Autotest ZenTest gem for Rails apps.
+with Autotest ZenTest gem and alike for Rails apps.
 DESC
 
   s.files         = `git ls-files`.split("\n")
@@ -22,7 +22,6 @@ DESC
   s.require_paths = ["lib"]
 
   s.add_dependency "notifier"
-  s.add_development_dependency "test-unit"
-  s.add_development_dependency "mocha"
+  s.add_development_dependency "rspec"
   s.add_development_dependency "rake"
 end

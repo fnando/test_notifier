@@ -48,6 +48,6 @@ module TestNotifier
     notifier
   end
 
-  autoload :Runner,     "test_notifier/runner"
-  autoload :Stats,      "test_notifier/stats"
+  require "test_notifier/runner"
+  require "test_notifier/stats"
 end
