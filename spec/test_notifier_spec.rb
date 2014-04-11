@@ -4,19 +4,16 @@ describe TestNotifier do
   before { unsupport_all_notifiers }
 
   it "uses default notifier" do
-    Notifier::Growl.stub :supported? => true
-    Notifier::Snarl.stub :supported? => true
+    allow(Notifier::Growl).to receive(:supported?).and_return(true)
+    allow(Notifier::Snarl).to receive(:supported?).and_return(true)
     TestNotifier.default_notifier = :snarl
 
     expect(TestNotifier.notifier).to eql(Notifier::Snarl)
   end
 
   it "outputs error message to $stderr when there's no supported notifier" do
-    STDERR
-      .should_receive(:<<)
-      .with(TestNotifier::NO_NOTIFIERS_MESSAGE)
-
-    Notifier::Placebo.should_receive(:notify)
+    expect(STDERR).to receive(:<<).with(TestNotifier::NO_NOTIFIERS_MESSAGE)
+    expect(Notifier::Placebo).to receive(:notify)
 
     TestNotifier.notify :status => :fail, :message => "You have failed!"
   end
@@ -24,8 +21,8 @@ describe TestNotifier do
   it "outputs error message won't display when silence_no_notifier_warning is true" do
     TestNotifier.silence_no_notifier_warning = true
 
-    STDERR.should_not_receive(:<<)
-    Notifier::Placebo.should_receive(:notify)
+    expect(STDERR).not_to receive(:<<)
+    expect(Notifier::Placebo).to receive(:notify)
 
     TestNotifier.notify :status => :fail, :message => "You have failed!"
   end
@@ -33,15 +30,15 @@ describe TestNotifier do
   it "outputs error message won't display when silence_no_notifier_warning is true" do
     TestNotifier.silence_no_notifier_warning = true
 
-    STDERR.should_not_receive(:<<)
-    Notifier::Placebo.should_receive(:notify)
+    expect(STDERR).not_to receive(:<<)
+    expect(Notifier::Placebo).to receive(:notify)
 
     TestNotifier.notify :status => :fail, :message => "You have failed!"
   end
 
   it "sends notification to supported notifier" do
-    Notifier::Snarl.stub :supported? => true
-    Notifier::Snarl.should_receive(:notify).with({
+    allow(Notifier::Snarl).to receive(:supported?).and_return(true)
+    expect(Notifier::Snarl).to receive(:notify).with({
       :status  => :fail,
       :message => "You have failed!",
       :title   => TestNotifier::TITLES[:fail],
