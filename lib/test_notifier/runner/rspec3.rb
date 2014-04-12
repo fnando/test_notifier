@@ -1,4 +1,5 @@
 require "test_notifier"
+require "rspec/core"
 require "rspec/core/formatters/base_text_formatter"
 
 class RSpec::Core::Formatters::BaseTextFormatter

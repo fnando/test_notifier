@@ -21,7 +21,7 @@ Check http://github.com/fnando/notifier to see how you can configure a notifier 
 
 If you're using Test::Unit you should add <tt>require "test_notifier/runner/test_unit"</tt> to your <tt>test_helper.rb</tt> file.
 
-If you're using RSpec you should add <tt>require "test_notifier/runner/spec"</tt> to your <tt>spec_helper.rb</tt> file. If you're using RSpec 2, you need to add <tt>require "test_notifier/runner/rspec"</tt> instead.
+If you're using RSpec you should add <tt>require "test_notifier/runner/spec"</tt> to your <tt>spec_helper.rb</tt> file. If you're using RSpec 2-3, you need to add <tt>require "test_notifier/runner/rspec"</tt> instead.
 
 If you're using Autotest you should add <tt>require "test_notifier/runner/autotest"</tt> to
 the file <tt>~/.autotest</tt>
