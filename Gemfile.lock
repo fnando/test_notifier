@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    test_notifier (2.0.1)
+    test_notifier (2.0.2)
       notifier
 
 GEM
