@@ -2,7 +2,7 @@ require "notifier"
 
 module TestNotifier
   class << self
-    attr_accessor :default_notifier, :silence_no_notifier_warning
+    attr_accessor :silence_no_notifier_warning
   end
 
   extend self
@@ -27,6 +27,10 @@ module TestNotifier
     :error   => "red"
   }
 
+  def default_notifier=(notifier)
+    Notifier.default_notifier = notifier
+  end
+
   def notify(options)
     options.merge!({
       :title => TITLES[options[:status]],
@@ -38,7 +42,6 @@ module TestNotifier
   end
 
   def notifier
-    Notifier.default_notifier = default_notifier
     notifier = Notifier.notifier
 
     if notifier == Notifier::Placebo && !silence_no_notifier_warning
