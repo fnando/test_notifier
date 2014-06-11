@@ -22,6 +22,6 @@ DESC
   s.require_paths = ["lib"]
 
   s.add_dependency "notifier"
-  s.add_development_dependency "rspec", ">= 3.0.0.beta2"
+  s.add_development_dependency "rspec", ">= 3.0.0"
   s.add_development_dependency "rake"
 end
