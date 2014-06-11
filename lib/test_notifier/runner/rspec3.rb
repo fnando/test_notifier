@@ -7,9 +7,11 @@ class RSpec::Core::Formatters::BaseTextFormatter
 
   def dump_summary(options)
     dump_summary_original(options)
-    example_count = options[:example_count]
-    failure_count = options[:failure_count]
-    pending_count = options[:pending_count]
+
+    example_count = options.example_count
+    failure_count = options.failure_count
+    pending_count = options.pending_count
+    examples = options.examples
 
     return if example_count.zero?
 
