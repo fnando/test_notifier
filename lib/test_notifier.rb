@@ -1,10 +1,6 @@
 require "notifier"
 
 module TestNotifier
-  class << self
-    attr_accessor :silence_no_notifier_warning
-  end
-
   extend self
 
   NO_NOTIFIERS_MESSAGE = "[TEST NOTIFIER] You have no supported notifiers installed. Please read documentation.\n"
@@ -26,6 +22,8 @@ module TestNotifier
     :success => "green",
     :error   => "red"
   }
+
+  attr_accessor :silence_no_notifier_warning
 
   def default_notifier=(notifier)
     Notifier.default_notifier = notifier
