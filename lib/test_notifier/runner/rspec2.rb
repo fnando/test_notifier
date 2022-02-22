@@ -1,29 +1,50 @@
+# frozen_string_literal: true
+
 require "test_notifier"
 require "rspec/core/formatters/base_text_formatter"
 
-class RSpec::Core::Formatters::BaseTextFormatter
-  alias dump_summary_original dump_summary
+module RSpec
+  module Core
+    module Formatters
+      class BaseTextFormatter
+        alias dump_summary_original dump_summary
 
-  def dump_summary(duration, example_count, failure_count, pending_count)
-    dump_summary_original(duration, example_count, failure_count, pending_count)
+        def dump_summary(duration, example_count, failure_count, pending_count)
+          dump_summary_original(
+            duration,
+            example_count,
+            failure_count,
+            pending_count
+          )
 
-    return if example_count.zero?
+          return if example_count.zero?
 
-    failure_filter = proc {|e|
-      e.instance_variable_get("@exception").class.name == "RSpec::Expectations::ExpectationNotMetError"
-    }
+          failure_filter = proc do |error|
+            error
+              .instance_variable_get(:@exception)
+              .instance_of?(RSpec::Expectations::ExpectationNotMetError)
+          end
 
-    error_filter = proc {|e|
-      %w[RSpec::Expectations::ExpectationNotMetError NilClass].include?(e.instance_variable_get("@exception").class.name)
-    }
+          error_filter = proc do |error|
+            %w[
+              RSpec::Expectations::ExpectationNotMetError
+              NilClass
+            ].include?(error.instance_variable_get(:@exception).class.name)
+          end
 
-    stats = TestNotifier::Stats.new(:rspec, {
-      :count    => example_count,
-      :failures => examples.select(&failure_filter).count,
-      :pending  => pending_count,
-      :errors   => examples.reject(&error_filter).count
-    })
+          stats = TestNotifier::Stats.new(
+            :rspec,
+            {
+              count: example_count,
+              failures: examples.count(&failure_filter),
+              pending: pending_count,
+              errors: examples.count(&error_filter)
+            }
+          )
 
-    TestNotifier.notify(:status => stats.status, :message => stats.message)
+          TestNotifier.notify(status: stats.status, message: stats.message)
+        end
+      end
+    end
   end
 end

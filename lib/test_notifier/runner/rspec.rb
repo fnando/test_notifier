@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require "rspec/core/version"
 
 if RSpec::Core::Version::STRING >= "3.0.0"

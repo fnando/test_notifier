@@ -39,11 +39,11 @@ If you're using MiniTest you should add
 You can define your notifier.
 
 ```ruby
-TestNotifier.default_notifier = :growl
+TestNotifier.default_notifier = :terminal_notifier
 ```
 
-The available notifiers are `:growl`, `:kdialog`, `:knotify`, `:notify_send`,
-`:osd_cat`, and `:snarl`.
+The available notifiers are `:terminal_notifier`, `:hud`, `:kdialog`,
+`:knotify`, `:notify_send`, `:osd_cat`, and `:snarl`.
 
 If you'd like to make Test Notifier optional for your project:
 
