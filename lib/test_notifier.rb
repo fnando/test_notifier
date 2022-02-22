@@ -9,9 +9,9 @@ module TestNotifier
                          "installed. Please read documentation.\n"
 
   IMAGES = {
-    fail: "#{File.dirname(__FILE__)}/../resources/fail.png",
-    error: "#{File.dirname(__FILE__)}/../resources/error.png",
-    success: "#{File.dirname(__FILE__)}/../resources/success.png"
+    fail: File.expand_path("#{__dir__}/../resources/fail.png"),
+    error: File.expand_path("#{__dir__}/../resources/error.png"),
+    success: File.expand_path("#{__dir__}/../resources/success.png")
   }.freeze
 
   HUD_SYMBOLS = {
