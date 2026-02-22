@@ -20,46 +20,16 @@ module TestNotifier
     end
 
     private def normalize(options)
-      %i[
-        count success failures pending errors
-        assertions
-      ].each_with_object({}) do |key, buffer|
-        buffer[key] = options[key].to_i
-      end
-    end
-
-    private def status_for_minitest
-      if options[:errors].nonzero?
-        :error
-      elsif options[:failures].nonzero?
-        :fail
-      else
-        :success
-      end
-    end
-
-    private def status_for_test_unit
-      if options[:errors].nonzero?
-        :error
-      elsif options[:failures].nonzero?
-        :fail
-      else
-        :success
-      end
+      %i[count success failures pending errors assertions]
+        .each_with_object({}) do |key, buffer|
+          buffer[key] = options[key].to_i
+        end
     end
 
     private def status_for_rspec
       if options[:errors].nonzero?
         :error
       elsif options[:failures].nonzero?
-        :fail
-      else
-        :success
-      end
-    end
-
-    private def status_for_spec
-      if options[:failures].nonzero?
         :fail
       else
         :success
@@ -81,25 +51,14 @@ module TestNotifier
       text.join(", ")
     end
 
-    private def message_for_spec
-      text = []
-      text << ("#{options[:count]} " + pluralize(options[:count], "example"))
-      text << "#{options[:failures]} failed" unless options[:failures].zero?
-      text << "#{options[:pending]} pending" unless options[:pending].zero?
-      text.join(", ")
-    end
-
-    private def message_for_test_unit
-      text = []
-      text << ("#{options[:count]} " + pluralize(options[:count], "test"))
-      text << ("#{options[:assertions]} " + pluralize(options[:assertions],
-                                                      "assertion"))
-      text << "#{options[:failures]} failed" unless options[:failures].zero?
-      unless options[:errors].zero?
-        text << ("#{options[:errors]} " + pluralize(options[:errors],
-                                                    "error"))
+    private def status_for_minitest
+      if options[:errors].nonzero?
+        :error
+      elsif options[:failures].nonzero?
+        :fail
+      else
+        :success
       end
-      text.join(", ")
     end
 
     private def message_for_minitest
@@ -108,15 +67,19 @@ module TestNotifier
       text << ("#{options[:assertions]} " + pluralize(options[:assertions],
                                                       "assertion"))
       text << "#{options[:failures]} failed" unless options[:failures].zero?
+
       unless options[:errors].zero?
         text << ("#{options[:errors]} " + pluralize(options[:errors],
                                                     "error"))
       end
+
+      text << "#{options[:pending]} pending" unless options[:pending].zero?
+
       text.join(", ")
     end
 
     private def pluralize(count, text)
-      count > 1 ? "#{text}s" : text
+      count == 1 ? text : "#{text}s"
     end
   end
 end

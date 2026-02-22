@@ -1,16 +1,6 @@
 # Test Notifier
 
-Inspired by
-http://railstips.org/2007/7/23/autotest-growl-pass-fail-notifications
-
-After using Growl notification, I decided to write my own plugin because I have
-to work on Ubuntu and Mac OS X and I missed the notification on my Linux box.
-This plugin works with Linux, Mac OS X and Windows. All you need to do is
-install the specific notification library for your OS.
-
-Instead of displaying lots of notifications for each failure, I prefer to be
-notified about the whole test result (you'll have to check your log file anyway
-in order to clean up the failures/errors).
+Display notifications when tests run. Supports Minitest and RSpec.
 
 ## Installation
 
@@ -23,20 +13,7 @@ notifier for your OS.
 
 ## Usage
 
-If you're using Test::Unit you should add
-`require "test_notifier/runner/test_unit"` to your `test_helper.rb` file.
-
-If you're using RSpec you should add `require "test_notifier/runner/spec"` to
-your `spec_helper.rb` file. If you're using RSpec 2-3, you need to add
-`require "test_notifier/runner/rspec"` instead.
-
-If you're using Autotest you should add
-`require "test_notifier/runner/autotest"` to the file `~/.autotest`
-
-If you're using MiniTest you should add
-`require "test_notifier/runner/minitest"` to your `test_helper.rb` file.
-
-You can define your notifier.
+You can set the default notifier, in case you want to use an specific one.
 
 ```ruby
 TestNotifier.default_notifier = :terminal_notifier

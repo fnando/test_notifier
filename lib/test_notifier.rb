@@ -16,7 +16,7 @@ module TestNotifier
 
   HUD_SYMBOLS = {
     fail: "exclamationmark.triangle",
-    error: "xmark.octagon.fill",
+    error: "xmark.octagon",
     success: "checkmark.circle"
   }.freeze
 
@@ -55,13 +55,14 @@ module TestNotifier
   def notifier
     notifier = Notifier.notifier
 
-    if notifier == Notifier::Placebo && !silence_no_notifier_warning
+    if notifier == Notifier::Noop && !silence_no_notifier_warning
       $stderr << NO_NOTIFIERS_MESSAGE
     end
 
     notifier
   end
 
-  require "test_notifier/runner"
   require "test_notifier/stats"
+  require "test_notifier/runner/minitest" if defined?(Minitest)
+  require "test_notifier/runner/rspec" if defined?(RSpec)
 end
