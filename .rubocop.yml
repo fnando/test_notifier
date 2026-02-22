@@ -7,3 +7,7 @@ AllCops:
   NewCops: enable
   Exclude:
     - vendor/**/*
+
+Minitest/UselessAssertion:
+  Exclude:
+    - test/fixtures/*
